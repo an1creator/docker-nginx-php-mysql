@@ -64,5 +64,3 @@ RUN apt-get update && apt-get upgrade -y \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-
-RUN composer install
