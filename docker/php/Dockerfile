@@ -65,6 +65,4 @@ RUN apt-get update && apt-get upgrade -y \
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
-
 RUN composer install
