@@ -19,7 +19,7 @@ services:
             - mysqldb
     php:
         build:
-            context: ./docker/php/Dockerfile
+            context: ./docker/php
             args:
                 - PHP_VERSION=${PHP_VERSION}
         restart: always
