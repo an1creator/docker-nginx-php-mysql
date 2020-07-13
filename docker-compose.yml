@@ -18,7 +18,10 @@ services:
             - php
             - mysqldb
     php:
-        context: ./docker/php/Dockerfile
+        build:
+            context: ./docker/php/Dockerfile
+            args:
+                - PHP_VERSION=${PHP_VERSION}
         restart: always
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"

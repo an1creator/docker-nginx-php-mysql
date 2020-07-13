@@ -1,4 +1,6 @@
-FROM php:7.4.0-fpm
+ARG PHP_VERSION
+
+FROM php:${PHP_VERSION}-fpm
 
 LABEL maintainer="N1 Creator <dev@n1creator.com>"
 
