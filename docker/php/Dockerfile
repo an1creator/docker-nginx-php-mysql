@@ -1,11 +1,14 @@
 ARG PHP_VERSION
 
+FROM composer:latest AS composer
 FROM php:${PHP_VERSION}-fpm
 
 LABEL maintainer="N1 Creator <dev@n1creator.com>"
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y \
+    git \
+    zip \
     g++ \
     libbz2-dev \
     libc-client-dev \
@@ -27,7 +30,6 @@ RUN apt-get update && apt-get upgrade -y \
     libreadline-dev \
     libxslt1-dev \
     libzip-dev \
-    memcached \
     wget \
     unzip \
     zlib1g-dev \
@@ -40,8 +42,6 @@ RUN apt-get update && apt-get upgrade -y \
     mysqli \
     opcache \
     pdo_mysql \
-    pdo_pgsql \
-    pgsql \
     soap \
     sockets \
     xmlrpc \
@@ -56,10 +56,6 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-ext-install ldap \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip \
-    && pecl install xdebug && docker-php-ext-enable xdebug \
-    && pecl install memcached && docker-php-ext-enable memcached \
-    && pecl install mongodb && docker-php-ext-enable mongodb \
-    && pecl install redis && docker-php-ext-enable redis \
     && yes '' | pecl install imagick && docker-php-ext-enable imagick \
     && docker-php-source delete \
     && apt-get remove -y g++ wget \
@@ -68,3 +64,7 @@ RUN apt-get update && apt-get upgrade -y \
     && rm -rf /tmp/* /var/tmp/*
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+RUN composer install
