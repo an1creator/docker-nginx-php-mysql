@@ -60,4 +60,3 @@ services:
       - ./web:/home/node/app
     expose:
       - "8081"
-    command: "npm install && npm run watch"
