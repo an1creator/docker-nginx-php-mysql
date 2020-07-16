@@ -61,4 +61,3 @@ services:
     restart: always
     expose:
       - "8181"
-    command: "npm install"
