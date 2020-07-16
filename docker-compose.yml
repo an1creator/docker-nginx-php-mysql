@@ -54,6 +54,7 @@ services:
       - "./data/db/mysql:/var/lib/mysql"
   node:
     image: "node:lts"
+    user: "root"
     working_dir: /home/node/app
     volumes:
       - ./web:/home/node/app
