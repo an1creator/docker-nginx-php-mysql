@@ -59,4 +59,4 @@ services:
       - ./web:/home/node/app
     restart: always
     expose:
-      - "8181"
+      - "8081"
