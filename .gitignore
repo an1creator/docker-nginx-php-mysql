@@ -20,6 +20,3 @@ nbproject/
 /nbproject/
 /nbproject/private/
 /nbproject/private/private.properties
-
-# SSL Certs
-etc/ssl/
