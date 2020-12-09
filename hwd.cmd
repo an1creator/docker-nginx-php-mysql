@@ -8,6 +8,11 @@ IF "%1" EQU "" (
             docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" "%2"
         )
     )
+    IF "%1" EQU "compose" (
+        IF NOT "%2" EQU "" (
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" "%2"
+        )
+    )
     IF "%1" EQU "down" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" down
     )
@@ -41,6 +46,11 @@ IF "%1" EQU "" (
     IF "%1" EQU "artisan" (
         IF NOT "%2" EQU "" (
             docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" exec php php artisan "%2"
+        )
+    )
+    IF "%1" EQU "logs" (
+        IF NOT "%2" EQU "" (
+            docker-compose logs -f "%2"
         )
     )
 )
