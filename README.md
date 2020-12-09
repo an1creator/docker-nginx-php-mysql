@@ -26,3 +26,7 @@ docker-compose exec php composer install
 ```sh
 docker-compose exec php php artisan ...
 ```
+# Запуск сборки сайта
+```sh
+docker-compose run node npm run watch-poll
+```
