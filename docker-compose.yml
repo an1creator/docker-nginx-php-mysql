@@ -8,9 +8,9 @@ services:
   web:
     image: nginx:alpine
     volumes:
-      - "./etc/ssl:/etc/ssl"
-      - "../src:/var/www/html"
-      - "./etc/nginx:/etc/nginx/conf.d"
+      - ./etc/ssl:/etc/ssl
+      - ${PROJECT_PATH}:/var/www/html
+      - ./etc/nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
       - "443:443"
@@ -28,8 +28,8 @@ services:
         - PHP_VERSION=${PHP_VERSION}
     restart: always
     volumes:
-      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - "../src:/var/www/html"
+      - ./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ${PROJECT_PATH}:/var/www/html
     networks:
       - app-network
   mysqldb:
@@ -48,16 +48,17 @@ services:
     networks:
       - app-network
     volumes:
-      - "../db/mysql:/var/lib/mysql"
-      - "./etc/mysql/docker.cnf:/etc/mysql/conf.d/docker.cnf"
-      - ../db/dumps:/docker-entrypoint-initdb.d
-  # node:
-  #   image: "node:lts"
-  #   user: "node"
-  #   working_dir: /home/node/app
-  #   volumes:
-  #     - "../src:/home/node/app"
-  #   expose:
-  #     - "9001"
-  #   networks:
-  #     - app-network
+      - ${DATABASE_PATH}/mysql:/var/lib/mysql
+      - ./etc/mysql/docker.cnf:/etc/mysql/conf.d/docker.cnf
+      - ${DATABASE_PATH}/dumps:/docker-entrypoint-initdb.d
+  node:
+    image: "node:lts"
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ${PROJECT_PATH}:/home/node/app
+    expose:
+      - "9001"
+    networks:
+      - app-network
+    command: npm i
