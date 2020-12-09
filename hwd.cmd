@@ -17,9 +17,15 @@ IF "%1" EQU "" (
     IF "%1" EQU "watch" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run watch-poll
     )
+    IF "%1" EQU "dev" (
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run dev
+    )
+    IF "%1" EQU "prod" (
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run prod
+    )
     IF "%1" EQU "npm" (
-        IF "%2" EQU "i" (
-            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm i
+        IF NOT "%2" EQU "" (
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm "%2"
         )
     )
     IF "%1" EQU "node" (
@@ -28,7 +34,9 @@ IF "%1" EQU "" (
         )
     )
     IF "%1" EQU "composer" (
-        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" exec php composer install
+        IF NOT "%2" EQU "" (
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" exec php composer "%2"
+        )
     )
     IF "%1" EQU "artisan" (
         IF NOT "%2" EQU "" (
