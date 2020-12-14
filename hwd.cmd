@@ -15,7 +15,7 @@ IF "%1" EQU "" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" up -d --build --force-recreate --remove-orphans
     )
     IF "%1" EQU "watch" (
-        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run watch
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run watch-poll
     )
     IF "%1" EQU "dev" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run dev
