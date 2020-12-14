@@ -15,22 +15,22 @@ IF "%1" EQU "" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" up -d --build --force-recreate --remove-orphans
     )
     IF "%1" EQU "watch" (
-        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run watch-poll
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run watch-poll
     )
     IF "%1" EQU "dev" (
-        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run dev
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run dev
     )
     IF "%1" EQU "prod" (
-        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node npm run prod
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run --rm node npm run prod
     )
     IF "%1" EQU "npm" (
         IF NOT "%2" EQU "" (
-            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run node %*
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" --rm run node %*
         )
     )
     IF "%1" EQU "node" (
         IF NOT "%2" EQU "" (
-            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" run %*
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" --rm run %*
         )
     )
     IF "%1" EQU "composer" (
