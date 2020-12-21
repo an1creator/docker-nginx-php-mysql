@@ -61,4 +61,3 @@ services:
       - "9001"
     networks:
       - app-network
-    command: bash -c "npm i && npm run watch-poll"
