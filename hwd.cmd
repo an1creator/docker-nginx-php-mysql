@@ -1,4 +1,6 @@
 @echo off
+set args=%*
+for /f "tokens=1,* delims= " %%a in ("%*") do set args=%%b
 
 IF "%1" EQU "" (
     ECHO Waiting for the command
@@ -47,5 +49,18 @@ IF "%1" EQU "" (
         IF NOT "%2" EQU "" (
             docker-compose logs -f %2
         )
+    )
+    IF "%1" EQU "deploy" (
+        plink -batch n1creator@84.201.185.138 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && sudo bash ./deploy.sh -gr -gp -gm -d %args%"
+        plink -batch n1creator@84.201.185.133 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && sudo bash ./deploy.sh -gr -gp %args%"
+    )
+    IF "%1" EQU "server_1" (
+        plink -batch n1creator@84.201.185.138 -i "d:\Projects\access&cfg\ssh-private.ppk" "%args%"
+    )
+    IF "%1" EQU "server_2" (
+        plink -batch n1creator@84.201.185.133 -i "d:\Projects\access&cfg\ssh-private.ppk" "%args%"
+    )
+    IF "%1" EQU "server_db" (
+        plink -batch n1creator@84.201.185.42 -i "d:\Projects\access&cfg\ssh-private.ppk" "%args%"
     )
 )
