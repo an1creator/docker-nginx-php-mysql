@@ -63,4 +63,7 @@ IF "%1" EQU "" (
     IF "%1" EQU "server_db" (
         plink -batch n1creator@84.201.185.42 -i "d:\Projects\access&cfg\ssh-private.ppk" "%args%"
     )
+    IF "%1" EQU "hosts" (
+        uhosts
+    )
 )
