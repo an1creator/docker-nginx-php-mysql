@@ -1,4 +1,7 @@
 @echo off
+
+if [%1]==[] goto usage
+
 set args=%*
 for /f "tokens=1,* delims= " %%a in ("%*") do set args=%%b
 
@@ -67,3 +70,7 @@ IF "%1" EQU "" (
         hwhosts
     )
 )
+
+:usage
+@echo Usage: %0 ^<args^>
+exit /B 1
