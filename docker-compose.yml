@@ -18,7 +18,7 @@ services:
     restart: always
     depends_on:
       - php
-      - mysqldb
+      - mysql
     networks:
       - app-network
   php:
@@ -32,9 +32,8 @@ services:
       - ${PROJECT_PATH}:/var/www/html
     networks:
       - app-network
-  mysqldb:
+  mysql:
     image: mysql:${MYSQL_VERSION}
-    container_name: ${MYSQL_HOST}
     restart: always
     env_file:
       - ".env"

@@ -84,7 +84,6 @@ IF "%1" EQU "" (
     )
     IF "%1" EQU "hosts" (
         hwhosts
-		exit /B 1
     )
 )
 
