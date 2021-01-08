@@ -16,6 +16,7 @@ IF "%1" EQU "" (
     )
     IF "%1" EQU "down" (
         docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" down --remove-orphans
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" rm --force --stop
 		exit /B 1
     )
     IF "%1" EQU "recreate" (
