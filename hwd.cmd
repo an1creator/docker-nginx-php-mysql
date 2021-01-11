@@ -71,15 +71,15 @@ IF "%1" EQU "" (
 		exit /B 1
     )
     IF "%1" EQU "server_1" (
-        plink -batch n1creator@84.201.185.138 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && %args%"
+        plink -batch n1creator@84.201.185.138 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && sudo %args%"
 		exit /B 1
     )
     IF "%1" EQU "server_2" (
-        plink -batch n1creator@84.201.185.133 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && %args%"
+        plink -batch n1creator@84.201.185.133 -i "d:\Projects\access&cfg\ssh-private.ppk" "cd /var/www/handswork.pro && sudo %args%"
 		exit /B 1
     )
     IF "%1" EQU "server_db" (
-        plink -batch n1creator@84.201.185.42 -i "d:\Projects\access&cfg\ssh-private.ppk" "%args%"
+        plink -batch n1creator@84.201.185.42 -i "d:\Projects\access&cfg\ssh-private.ppk" "sudo %args%"
 		exit /B 1
     )
     IF "%1" EQU "hosts" (
