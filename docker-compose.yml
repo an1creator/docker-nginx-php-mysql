@@ -10,7 +10,8 @@ services:
     volumes:
       - ./etc/ssl:/etc/ssl
       - ${PROJECT_PATH}:/var/www/html
-      - ./etc/nginx:/etc/nginx/conf.d
+      - ./etc/nginx/vhosts:/etc/nginx/conf.d
+      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
       - "443:443"
