@@ -1,5 +1,12 @@
 version: "3"
 
+networks:
+  handswork:
+    external:
+      name: handswork
+  backend:
+    driver: bridge
+
 services:
   web:
     image: nginx:alpine
@@ -16,6 +23,9 @@ services:
     depends_on:
       - php
       - mysql
+    networks:
+      - handswork
+      - backend
   php:
     build:
       context: ./docker/php
@@ -25,6 +35,8 @@ services:
     volumes:
       - ./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ${PROJECT_PATH}:/var/www/html
+    networks:
+      - backend
   mysql:
     image: mysql:${MYSQL_VERSION}
     restart: always
@@ -41,6 +53,8 @@ services:
       - ${DATABASE_PATH}/mysql:/var/lib/mysql
       - ./etc/mysql/docker.cnf:/etc/mysql/conf.d/docker.cnf
       - ${DATABASE_PATH}/dumps:/docker-entrypoint-initdb.d
+    networks:
+      - backend
   node:
     image: "node:lts"
     user: "node"
