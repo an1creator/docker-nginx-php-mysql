@@ -85,6 +85,16 @@ IF "%1" EQU "" (
     IF "%1" EQU "hosts" (
         hwhosts
     )
+    IF "%1" EQU "php" (
+        IF NOT "%2" EQU "" (
+            docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" exec php %*
+			exit /B 1
+        )
+    )
+    IF "%1" EQU "test" (
+        docker-compose -f "%~dp0\docker-compose.yml" --env-file "%~dp0\.env" exec php php vendor/bin/phpunit %2 %3 %4 %5 %6 %7 %8 %9
+        exit /B 1
+    )
 )
 
 :usage
